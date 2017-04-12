@@ -69,9 +69,11 @@ class BlocklyServer(object):
             filtered_ports = []
             for port in ports:
                 self.logger.debug('Port %s discovered.', port)
+                # Filter out Bluetooth ports; they are risky to open and scan
                 if ' bt ' not in port.lower() and 'bluetooth' not in port.lower():
                     filtered_ports.append(port)
-                    self.logger.debug("Port %2 appended to list.", port)
+                else:
+                    self.logger.debug("Port %s filtered from the list.", port)
             return filtered_ports
         else:
             # No useable ports detected. Need to determine how the browser
@@ -103,7 +105,7 @@ class BlocklyServer(object):
 
         self.logger.debug('Loading program to device.')
 
-        (success, out, err) = self.propellerLoad.load(action, binary_file, comport)
+        (success, out, err) = self.propellerLoad.download(action, binary_file, comport)
         self.queue.put((10, 'INFO', 'Application loaded (%s)' % action))
 
         self.logger.info('Application load complete.')
