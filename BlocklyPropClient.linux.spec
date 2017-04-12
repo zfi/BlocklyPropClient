@@ -37,7 +37,6 @@ coll = COLLECT(exe,
                strip=False,
                upx=False,
                name='BlocklyPropClient')
-
 # Analysis
 #             pathex=['/home/developer/Projects/BlocklyPropClient'],
 

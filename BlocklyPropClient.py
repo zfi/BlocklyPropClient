@@ -257,6 +257,7 @@ class BlocklyPropClient(tk.Tk):
     # Open the application About dialog box
     def about_info(self):
         try:
+            module_logger.debug("Help file is located at: %s", self.appdir + "/about.txt")
             with open(self.appdir + '/about.txt', 'r') as about_file:
                 tkMessageBox.showinfo("About BlocklyProp", about_file.read())
         except OSError:
